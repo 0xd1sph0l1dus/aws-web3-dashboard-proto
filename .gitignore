@@ -1,0 +1,79 @@
+# ========================================
+# Environment variables
+# ========================================
+.env
+.env.local
+.env.*.local
+
+# ========================================
+# CDK
+# ========================================
+infrastructure/cdk.out/
+infrastructure/dist/
+infrastructure/node_modules/
+infrastructure/*.js
+infrastructure/*.d.ts
+infrastructure/.cdk.staging/
+
+# ========================================
+# Lambda functions
+# ========================================
+backend/**/node_modules/
+backend/**/dist/
+backend/**/*.zip
+
+# ========================================
+# Frontend (Vue.js)
+# ========================================
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.cache/
+
+# ========================================
+# Logs
+# ========================================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ========================================
+# OS
+# ========================================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ========================================
+# IDE
+# ========================================
+.vscode/
+.idea/
+*.iml
+*.sublime-*
+
+# ========================================
+# Testing
+# ========================================
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+
+# ========================================
+# AWS
+# ========================================
+.aws-sam/
+samconfig.toml
+
+# ========================================
+# Temporary files
+# ========================================
+*.tmp
+*.temp
+.cache/
