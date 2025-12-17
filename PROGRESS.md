@@ -139,23 +139,27 @@
 
 ---
 
+## ✅ Session 2 : Implémentation backend (Lambda functions) - 17 décembre 2024
+
+### **Lambda functions créées**
+
+#### **Authentification Web3 Custom Flow**
+- [x] `backend/auth/define-auth-challenge/index.ts` - Orchestration du flow
+- [x] `backend/auth/create-auth-challenge/index.ts` - Génération du nonce
+- [x] `backend/auth/verify-auth-challenge/index.ts` - Vérification ECDSA
+- [x] `backend/auth/*/package.json` - Dépendances (aws-lambda, ethers.js)
+- [x] `backend/auth/*/tsconfig.json` - Configuration TypeScript
+- [x] `backend/shared/utils/retry.ts` - Retry avec exponential backoff
+
+#### **Concepts SAA-C03 validés**
+- ✅ Lambda event-driven architecture (Cognito triggers)
+- ✅ ECDSA signature verification avec ethers.js
+- ✅ Error handling et retry logic (circuit breaker)
+- ✅ CloudWatch Logs structured logging
+- ✅ Principe du moindre privilège IAM
+- ✅ Lambda ARM Graviton2 (-20% coût, +19% performance)
+
 ## 📋 Prochaines étapes
-
-### **Session 2 : Implémentation backend (Lambda functions)**
-
-#### **À créer**
-- [ ] `backend/auth/define-auth-challenge/index.ts`
-- [ ] `backend/auth/create-auth-challenge/index.ts`
-- [ ] `backend/auth/verify-auth-challenge/index.ts`
-- [ ] `backend/auth/verify-auth-challenge/package.json` (ethers.js)
-- [ ] `backend/shared/utils/retry.ts`
-- [ ] `backend/shared/types/index.ts`
-
-#### **Concepts à couvrir**
-- Lambda event handling (Cognito triggers)
-- ECDSA signature verification (ethers.js)
-- Error handling et retry logic
-- CloudWatch Logs structured logging
 
 ---
 

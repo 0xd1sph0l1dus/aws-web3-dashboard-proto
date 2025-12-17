@@ -1,0 +1,18 @@
+{
+  "name": "define-auth-challenge",
+  "version": "1.0.0",
+  "description": "Lambda function to define Cognito custom auth challenge flow",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "aws-lambda": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.130",
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0"
+  }
+}
