@@ -1,0 +1,19 @@
+{
+  "name": "get-transactions-lambda",
+  "version": "1.0.0",
+  "description": "Lambda function to get transactions from Etherscan with DynamoDB caching",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.478.0",
+    "@aws-sdk/client-secrets-manager": "^3.478.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.131",
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.3"
+  }
+}

@@ -8,9 +8,9 @@
 
 - [x] Définir les exigences fonctionnelles et non fonctionnelles
 - [x] Concevoir l'architecture alignée SAA-C03
-- [ ] Implémenter l'infrastructure AWS (CDK)
-- [ ] Développer le backend (Lambda functions)
-- [ ] Développer le frontend (Vue.js)
+- [x] Implémenter l'infrastructure AWS (CDK) - 4 stacks
+- [x] Développer le backend (Lambda functions) - 7 functions
+- [x] Développer le frontend (Vue.js) - Application complète
 - [ ] Tester et déployer
 - [ ] Documenter pour le portfolio
 

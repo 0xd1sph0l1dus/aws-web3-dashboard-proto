@@ -2,10 +2,10 @@
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { AuthStack } from '../lib/stacks/auth-stack';
-// TODO: Uncomment when stacks are implemented
-// import { DatabaseStack } from '../lib/stacks/database-stack';
-// import { ApiStack } from '../lib/stacks/api-stack';
-// import { FrontendStack } from '../lib/stacks/frontend-stack';
+import { DatabaseStack } from '../lib/stacks/database-stack';
+import { ApiStack } from '../lib/stacks/api-stack';
+import { FrontendStack } from '../lib/stacks/frontend-stack';
+// TODO: Uncomment when stack is implemented
 // import { MonitoringStack } from '../lib/stacks/monitoring-stack';
 import * as dotenv from 'dotenv';
 
@@ -47,14 +47,37 @@ const authStack = new AuthStack(app, 'Web3DashboardAuthStack', {
   tags: commonTags,
 });
 
-// TODO: Uncomment when stacks are implemented
-/*
+/**
+ * ÉTAPE 2 : Database Stack
+ * 
+ * Services AWS :
+ * - Amazon DynamoDB (NoSQL, serverless)
+ * - DynamoDB GSI (Global Secondary Index)
+ * 
+ * Concepts SAA-C03 :
+ * - Performance : DynamoDB vs RDS (latence < 10ms)
+ * - Coût : On-Demand vs Provisioned billing
+ * - Résilience : Multi-AZ automatique, PITR
+ */
 const databaseStack = new DatabaseStack(app, 'Web3DashboardDatabaseStack', {
   env,
   description: 'DynamoDB tables with GSI for user data (SAA-C03)',
   tags: commonTags,
 });
 
+/**
+ * ÉTAPE 3 : API Stack
+ * 
+ * Services AWS :
+ * - Amazon API Gateway (REST API)
+ * - AWS Lambda (compute serverless)
+ * - AWS Secrets Manager (API keys)
+ * 
+ * Concepts SAA-C03 :
+ * - Performance : API Gateway caching, Lambda ARM
+ * - Sécurité : Cognito Authorizer, Secrets Manager
+ * - Coût : Lambda ARM (Graviton2) = -20% coût
+ */
 const apiStack = new ApiStack(app, 'Web3DashboardApiStack', {
   env,
   description: 'API Gateway + Lambda functions with caching (SAA-C03)',
@@ -62,8 +85,21 @@ const apiStack = new ApiStack(app, 'Web3DashboardApiStack', {
   userPool: authStack.userPool,
   usersTable: databaseStack.usersTable,
   alertsTable: databaseStack.alertsTable,
+  transactionsCacheTable: databaseStack.transactionsCacheTable,
 });
 
+/**
+ * ÉTAPE 4 : Frontend Stack
+ * 
+ * Services AWS :
+ * - Amazon S3 (static hosting)
+ * - Amazon CloudFront (CDN)
+ * 
+ * Concepts SAA-C03 :
+ * - Performance : Edge caching (400+ locations)
+ * - Sécurité : HTTPS obligatoire, OAI
+ * - Coût : S3 + CloudFront < EC2
+ */
 const frontendStack = new FrontendStack(app, 'Web3DashboardFrontendStack', {
   env,
   description: 'S3 + CloudFront for Vue.js frontend (SAA-C03)',
@@ -73,6 +109,8 @@ const frontendStack = new FrontendStack(app, 'Web3DashboardFrontendStack', {
   userPoolClientId: authStack.userPoolClient.userPoolClientId,
 });
 
+// TODO: Uncomment when stack is implemented
+/*
 const monitoringStack = new MonitoringStack(app, 'Web3DashboardMonitoringStack', {
   env,
   description: 'CloudWatch monitoring and alarms (SAA-C03)',
@@ -81,12 +119,13 @@ const monitoringStack = new MonitoringStack(app, 'Web3DashboardMonitoringStack',
   lambdaFunctions: apiStack.lambdaFunctions,
   distribution: frontendStack.distribution,
 });
+*/
 
+// Dépendances entre stacks (ordre de déploiement)
 databaseStack.addDependency(authStack);
 apiStack.addDependency(databaseStack);
 frontendStack.addDependency(apiStack);
-monitoringStack.addDependency(frontendStack);
-*/
+// monitoringStack.addDependency(frontendStack);
 
 // Outputs globaux (affichés après déploiement)
 // Note: CfnOutput must be created within a Stack scope
